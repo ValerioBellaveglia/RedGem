@@ -1,0 +1,23 @@
+{
+  "name": "redgem",
+  "version": "1.0.2",
+  "description": "Sleek methods for a clean and sleek javascript code",
+  "main": "redgem.js",
+  "type": "module",
+  "directories": {
+    "tests": "tests"
+  },
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValerioBellaveglia/RedGem.git"
+  },
+  "author": "Valerio Bellaveglia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValerioBellaveglia/RedGem/issues"
+  },
+  "homepage": "https://github.com/ValerioBellaveglia/RedGem#readme"
+}
