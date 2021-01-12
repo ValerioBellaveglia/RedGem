@@ -23,7 +23,7 @@ export default [
                 return keepEmptyStrings ? (objectValue != null && objectValue != undefined) : objectValue
             }
 
-            var newObjectKeys = Object.keys(this).filter((objectKey) => condition(this[objectKey]))
+            let newObjectKeys = Object.keys(this).filter((objectKey) => condition(this[objectKey]))
             var object = {}
             
             newObjectKeys.forEach((objectKey) => {
@@ -67,6 +67,38 @@ export default [
             })
             
             return thisObjectPropertiesInSecondObject && secondObjectPropertiesInThisObject
+        }
+    },
+    {
+        // Filters object leaving only key-value pairs that match the callback condition
+        name: 'filter',
+        function: function (callback) {
+            var object = {}
+
+            Object.keys(this).forEach((objectKey) => {
+                if (callback(objectKey, this[objectKey])) object[objectKey] = this[objectKey]
+            })
+
+            return object
+        }
+    },
+    {
+        // Removes from object all key-value pairs that match the callback condition
+        name: 'reject',
+        function: function (callback) {
+            var object = {}
+
+            Object.keys(this).forEach((objectKey) => {
+                if (!callback(objectKey, this[objectKey])) object[objectKey] = this[objectKey]
+            })
+
+            return object
+        }
+    },
+    {
+        name: 'length',
+        function: function (callback) {
+            return Object.keys(this).length
         }
     }
 ]

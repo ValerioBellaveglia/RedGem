@@ -138,5 +138,62 @@ export default [
 
             return true
         }
+    },
+    {
+        context: 'object',
+        name: 'filter',
+        run: function () {
+            let object = {a: 1, b: 2, c: 3, d: 4, e: 5}
+            let objectGreaterThanThree = object.filter((key, value) => value > 3)
+            let objectWithoutAE = object.filter((key, value) => key != 'a' && key != 'e')
+
+            expect(this, objectGreaterThanThree.d === 4)
+            expect(this, objectGreaterThanThree.e === 5)
+            expect(this, !Object.keys(objectGreaterThanThree).includes('a'))
+            expect(this, !Object.keys(objectGreaterThanThree).includes('b'))
+            expect(this, !Object.keys(objectGreaterThanThree).includes('c'))
+            
+            expect(this, objectWithoutAE.b === 2)
+            expect(this, objectWithoutAE.c === 3)
+            expect(this, objectWithoutAE.d === 4)
+            expect(this, !Object.keys(objectWithoutAE).includes('a'))
+            expect(this, !Object.keys(objectWithoutAE).includes('e'))
+
+            return true
+        }
+    },
+    {
+        context: 'object',
+        name: 'reject',
+        run: function () {
+            let object = {a: 1, b: 2, c: 3, d: 4, e: 5}
+            let objectGreaterThanThree = object.reject((key, value) => value < 4)
+            let objectWithoutAE = object.reject((key, value) => key === 'a' || key === 'e')
+
+            expect(this, objectGreaterThanThree.d === 4)
+            expect(this, objectGreaterThanThree.e === 5)
+            expect(this, !Object.keys(objectGreaterThanThree).includes('a'))
+            expect(this, !Object.keys(objectGreaterThanThree).includes('b'))
+            expect(this, !Object.keys(objectGreaterThanThree).includes('c'))
+            
+            expect(this, objectWithoutAE.b === 2)
+            expect(this, objectWithoutAE.c === 3)
+            expect(this, objectWithoutAE.d === 4)
+            expect(this, !Object.keys(objectWithoutAE).includes('a'))
+            expect(this, !Object.keys(objectWithoutAE).includes('e'))
+
+            return true
+        }
+    },
+    {
+        context: 'object',
+        name: 'length',
+        run: function () {
+            let object = {a: 1, b: 2}
+
+            expect(this, object.length() === 2)
+
+            return true
+        }
     }
 ]
