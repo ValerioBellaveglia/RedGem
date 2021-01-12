@@ -124,5 +124,38 @@ export default [
 
             return true
         }
+    },
+    {
+        context: 'array',
+        name: 'alike',
+        run: function () {
+            let array1 = [1, 2, 3]
+            let array2 = [1, 2, 3]
+            let array3 = [1, 2, 'string']
+            let array4 = [1, 2, ['a']]
+            let array5 = [1, 2, ['a']]
+            let array6 = [1, 2, ['b']]
+            let array7 = [1, 2, {a: ['b']}]
+            let array8 = [1, 2, {a: ['b']}]
+            let array9 = [1, 2, {a: ['c']}]
+            let array10 = [1, 2, {b: ['c']}]
+            let array11 = [1, 2, [{a: 1}, {b: 2}, {c: 3}], {a: [1, 2, {a: [1], b: {c: [1, null, {a: 1}]}}]}]
+            let array12 = [1, 2, [{a: 1}, {b: 2}, {c: 3}], {a: [1, 2, {a: [1], b: {c: [1, null, {a: 1}]}}]}]
+            let array13 = [1, 2, [{a: 1}, {b: 2}, {c: 3}], {a: [1, 2, {a: [1], b: {c: [1, null, {a: 2}]}}]}]
+
+            expect(this, array1 != array2)
+            expect(this, array1.alike(array2) === true)
+            expect(this, array2.alike(array3) === false)
+            expect(this, array4.alike(array5) === true)
+            expect(this, array5.alike(array6) === false)
+            expect(this, array7.alike(array8) === true)
+            expect(this, array8.alike(array9) === false)
+            expect(this, array9.alike(array10) === false)
+            expect(this, array8.alike(array10) === false)
+            expect(this, array11.alike(array12) === true)
+            expect(this, array12.alike(array13) === false)
+
+            return true
+        }
     }
 ]

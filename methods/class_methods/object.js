@@ -1,4 +1,11 @@
+import { isObject } from '../../helpers.js'
+
 export default [
+    {
+        // Checks if the argument is a literal object that can have key-value pairs.
+        name: 'isObject',
+        function: isObject
+    },
     {
         // Checks wether the object contains at least one key-value pair that satisfies the callback condition
         name: 'any',
@@ -35,6 +42,31 @@ export default [
             })
 
             return this
+        }
+    },
+    {
+        // Checks if two objects are equivalent, having the same key/value pairs. Ignores order.
+        name: 'alike',
+        function: function (object) {
+            if (!isObject(object)) throw 'Cannot perform comparison of object with non-object argument'
+
+            let thisObjectPropertiesInSecondObject = Object.keys(this).every((thisObjectKey) => {
+                if (Array.isArray(this[thisObjectKey]) || isObject(this[thisObjectKey])) {
+                    return Object.keys(object).includes(thisObjectKey) && this[thisObjectKey].alike(object[thisObjectKey])
+                } else {
+                    return this[thisObjectKey] === object[thisObjectKey]
+                }
+            })
+
+            let secondObjectPropertiesInThisObject = Object.keys(object).every((secondObjectKey) => {
+                if (Array.isArray(object[secondObjectKey]) || isObject(object[secondObjectKey])) {
+                    return Object.keys(this).includes(secondObjectKey) && this[secondObjectKey].alike(object[secondObjectKey])
+                } else {
+                    return this[secondObjectKey] === object[secondObjectKey]
+                }
+            })
+            
+            return thisObjectPropertiesInSecondObject && secondObjectPropertiesInThisObject
         }
     }
 ]

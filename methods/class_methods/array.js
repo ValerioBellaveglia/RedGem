@@ -1,3 +1,5 @@
+import { isObject } from '../../helpers.js'
+
 export default [
     {
         // Returns first element (or first n elements if n is given) of the array.
@@ -73,6 +75,67 @@ export default [
         name: 'reject',
         function: function (callback) {
             return this.filter((arrayElement) => !callback(arrayElement))
+        }
+    },
+    {
+        // Checks if two arrays are equivalent. Ignores order.
+        name: 'alike',
+        function: function (array) {
+            if (array === undefined || array === null || !Array.isArray(array)) throw 'Cannot perform comparison of array with non-array argument'
+
+            let thisArrayContainsSecondArrayElements = this.every((arrayElement) => {
+                if (Array.isArray(arrayElement) || isObject(arrayElement)) {
+                    let arrayElementQuantityInThisArray = this.filter((thisArrayElement) => {
+                        if (Array.isArray(thisArrayElement) || isObject(thisArrayElement)) {
+                            let sameType = Array.isArray(arrayElement) && Array.isArray(thisArrayElement) || isObject(arrayElement) && isObject(thisArrayElement)
+                            return sameType && arrayElement.alike(thisArrayElement)
+                        } else {
+                            return arrayElement === thisArrayElement
+                        }
+                    }).length
+
+                    let arrayElementQuantityInSecondArray = array.filter((secondArrayElement) => {
+                        if (Array.isArray(secondArrayElement) || isObject(secondArrayElement)) {
+                            let sameType = Array.isArray(arrayElement) && Array.isArray(secondArrayElement) || isObject(arrayElement) && isObject(secondArrayElement)
+                            return sameType && arrayElement.alike(secondArrayElement)
+                        } else {
+                            return arrayElement === secondArrayElement
+                        }
+                    }).length
+
+                    return arrayElementQuantityInThisArray === arrayElementQuantityInSecondArray
+                } else {
+                    return array.includes(arrayElement)
+                }
+            })
+
+            let secondArrayContainsThisArrayElements = array.every((arrayElement) => {
+                if (Array.isArray(arrayElement) || isObject(arrayElement)) {
+                    let arrayElementQuantityInThisArray = this.filter((thisArrayElement) => {
+                        if (Array.isArray(thisArrayElement) || isObject(thisArrayElement)) {
+                            let sameType = Array.isArray(arrayElement) && Array.isArray(thisArrayElement) || isObject(arrayElement) && isObject(thisArrayElement)
+                            return sameType && arrayElement.alike(thisArrayElement)
+                        } else {
+                            return arrayElement === thisArrayElement
+                        }
+                    }).length
+
+                    let arrayElementQuantityInSecondArray = array.filter((secondArrayElement) => {
+                        if (Array.isArray(secondArrayElement) || isObject(secondArrayElement)) {
+                            let sameType = Array.isArray(arrayElement) && Array.isArray(secondArrayElement) || isObject(arrayElement) && isObject(secondArrayElement)
+                            return sameType && arrayElement.alike(secondArrayElement)
+                        } else {
+                            return arrayElement === secondArrayElement
+                        }
+                    }).length
+
+                    return arrayElementQuantityInThisArray === arrayElementQuantityInSecondArray
+                } else {
+                    return this.includes(arrayElement)
+                }
+            })
+
+            return thisArrayContainsSecondArrayElements && secondArrayContainsThisArrayElements
         }
     }
 ]

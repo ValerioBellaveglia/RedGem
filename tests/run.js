@@ -11,22 +11,24 @@ export default function run () {
     tests.forEach((test) => {
         try {
             if (test.run()) {
-                console.error(`Test with name ${test.name} in context ${test.context} passed!`)
+                console.error('%s\x1b[36m%s\x1b[0m%s\x1b[36m%s\x1b[0m%s\x1b[32m%s\x1b[0m', 'Test with name ', test.name, ' in context ', test.context, ' has ', 'passed!')
                 passed.push({context: test.context, name: test.name})
             } else {
-                console.error(`Test with name ${test.name} in context ${test.context} failed!`)
+                console.error('%s\x1b[36m%s\x1b[0m%s\x1b[36m%s\x1b[0m%s\x1b[31m%s\x1b[0m', 'Test with name ', test.name, ' in context ', test.context, ' has ', 'failed!')
                 failed.push({context: test.context, name: test.name})
             }
         } catch (error) {
-            console.error(`Test with name ${test.name} in context ${test.context} failed with error:`, error)
+            console.error('%s\x1b[36m%s\x1b[0m%s\x1b[36m%s\x1b[0m%s\x1b[31m%s\x1b[0m', 'Test with name ', test.name, ' in context ', test.context, ' has ', `failed: ${error}`)
             failed.push({context: test.context, name: test.name})
         }
     })
 
     console.log('--------------------------------')
-    console.log(`${failed.length + passed.length} tests were run: ${passed.length} passed, ${failed.length} failed.`)
-    console.log('Passed tests:')
+    console.log('%s\x1b[32m%s\x1b[31m%s\x1b[0m', `${failed.length + passed.length} tests were run: `, `${passed.length} passed,`, ` ${failed.length} failed.`)
+    console.log('--------------------------------')
+    console.log('\x1b[32m%s\x1b[0m', 'Passed tests:')
     console.log(passed)
-    console.log('Failed tests:')
-    console.log(failed)
+    console.log('--------------------------------')
+    console.log('\x1b[31m%s\x1b[32m%s\x1b[0m', 'Failed tests: ', failed.length ? null : 'none!')
+    if (failed.length) console.log(failed)
 }
