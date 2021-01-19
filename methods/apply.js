@@ -1,6 +1,6 @@
-import stringMethods from './class_methods/string.js'
-import arrayMethods from './class_methods/array.js'
-import objectMethods from './class_methods/object.js'
+import stringMethods from './prototype_methods/string.js'
+import arrayMethods from './prototype_methods/array.js'
+import objectMethods from './prototype_methods/object.js'
 
 export default function apply () {
     stringMethods.forEach((method) => {

@@ -1,6 +1,6 @@
-import stringTests from './class_tests/string.js'
-import arrayTests from './class_tests/array.js'
-import objectTests from './class_tests/object.js'
+import stringTests from './prototype_tests/string.js'
+import arrayTests from './prototype_tests/array.js'
+import objectTests from './prototype_tests/object.js'
 
 const tests = stringTests.concat(arrayTests).concat(objectTests)
 
