@@ -1,6 +1,6 @@
 {
   "name": "redgem",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Sleek methods for a clean and sleek javascript code",
   "main": "redgem.js",
   "type": "module",
