@@ -31,5 +31,47 @@ export default [
 
             return true
         }
+    },
+    {
+        context: 'string',
+        name: 'toCamelCase',
+        run: function () {
+            let string1 = 'string'
+            let string2 = 'string with spaces'
+            let string3 = 'string-kebab-case'
+            let string4 = 'string_snake_case'
+            let string5 = 'StringPascalCase'
+            let string6 = 'stRiNg whIch-isMi_xed'
+
+            expect(this, string1.toCamelCase() == 'string')
+            expect(this, string2.toCamelCase() == 'stringWithSpaces')
+            expect(this, string3.toCamelCase() == 'stringKebabCase')
+            expect(this, string4.toCamelCase() == 'stringSnakeCase')
+            expect(this, string5.toCamelCase() == 'stringPascalCase')
+            expect(this, string6.toCamelCase() == 'stRiNgWhIchIsMiXed')
+
+            return true
+        }
+    },
+    {
+        context: 'string',
+        name: 'toPascalCase',
+        run: function () {
+            let string1 = 'string'
+            let string2 = 'string with spaces'
+            let string3 = 'string-kebab-case'
+            let string4 = 'string_snake_case'
+            let string5 = 'stringCamelCase'
+            let string6 = 'stRiNg whIch-isMi_xed'
+
+            expect(this, string1.toPascalCase() == 'String')
+            expect(this, string2.toPascalCase() == 'StringWithSpaces')
+            expect(this, string3.toPascalCase() == 'StringKebabCase')
+            expect(this, string4.toPascalCase() == 'StringSnakeCase')
+            expect(this, string5.toPascalCase() == 'StringCamelCase')
+            expect(this, string6.toPascalCase() == 'StRiNgWhIchIsMiXed')
+
+            return true
+        }
     }
 ]

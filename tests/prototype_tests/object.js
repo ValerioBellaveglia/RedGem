@@ -195,5 +195,45 @@ export default [
 
             return true
         }
+    },
+    {
+        context: 'object',
+        name: 'toCamelCase',
+        run: function () {
+            let object = {'string_is_snake_case': 1, 'string-is-kebab-case': 2, 'string with spaces': 3, 'StringIsPascalCase': 4, 'strIng is genERic': 5}
+            let camelizedObject = object.toCamelCase()
+
+            expect(this, camelizedObject['string_is_snake_case'] === undefined)
+            expect(this, camelizedObject['string-is-kebab-case'] === undefined)
+            expect(this, camelizedObject['string with spaces'] === undefined)
+            expect(this, camelizedObject['StringIsPascalCase'] === undefined)
+            
+            expect(this, camelizedObject['stringIsSnakeCase'] === 1)
+            expect(this, camelizedObject['stringIsKebabCase'] === 2)
+            expect(this, camelizedObject['stringWithSpaces'] === 3)
+            expect(this, camelizedObject['stringIsPascalCase'] === 4)
+
+            return true
+        }
+    },
+    {
+        context: 'object',
+        name: 'toPascalCase',
+        run: function () {
+            let object = {'string_is_snake_case': 1, 'string-is-kebab-case': 2, 'string with spaces': 3, 'stringIsCamelCase': 4, 'strIng is genERic': 5}
+            let camelizedObject = object.toPascalCase()
+
+            expect(this, camelizedObject['string_is_snake_case'] === undefined)
+            expect(this, camelizedObject['string-is-kebab-case'] === undefined)
+            expect(this, camelizedObject['string with spaces'] === undefined)
+            expect(this, camelizedObject['stringIsCamelCase'] === undefined)
+
+            expect(this, camelizedObject['StringIsSnakeCase'] === 1)
+            expect(this, camelizedObject['StringIsKebabCase'] === 2)
+            expect(this, camelizedObject['StringWithSpaces'] === 3)
+            expect(this, camelizedObject['StringIsCamelCase'] === 4)
+
+            return true
+        }
     }
 ]

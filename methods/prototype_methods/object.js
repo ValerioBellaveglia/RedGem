@@ -1,4 +1,5 @@
 import { isObject } from '../../helpers.js'
+import camelcaseKeys from 'camelcase-keys'
 
 export default [
     {
@@ -96,9 +97,24 @@ export default [
         }
     },
     {
+        // Returns the number of key-value pairs inside the object.
         name: 'length',
-        function: function (callback) {
+        function: function () {
             return Object.keys(this).length
+        }
+    },
+    {
+        // Turns all keys to camelCase.
+        name: 'toCamelCase',
+        function: function () {
+            return camelcaseKeys(this)
+        }
+    },
+    {
+        // Turns all keys to PascalCase
+        name: 'toPascalCase',
+        function: function () {
+            return camelcaseKeys(this, { pascalCase: true })
         }
     }
 ]
